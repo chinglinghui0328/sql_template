@@ -8,13 +8,6 @@ const db = new sqlite3.Database(path.join(__dirname, "sample.db"), sqlite3.OPEN_
     console.log("Connected to database!");
 })
 
-/*
-CRUD
-CREATE
-READ
-UPDATE
-DELETE
-*/
 
 const Timmy = {
     ID: "1234567",
@@ -33,6 +26,45 @@ function CallbackFunc(Error, Results){
     Results.forEach(data => console.log(data));
 }
 
-let sql = ``
+// let sql = `
+// CREATE TABLE IF NOT EXISTS Users(
+//     ID TEXT PRIMARY KEY,
+//     Username TEXT,
+//     Emali TEXT,
+//     DOB TEXT
+// )
+// `
 
-db.exec(sql, CallbackFunc);
+let show =`
+SELECT name FROM pragma_table_info("Users");
+`
+
+let rename =`
+ALTER TABLE Users
+RENAME COLUMN id TO ID
+`
+
+let insert =`
+INSERT INTO Users(ID, Username, EMALI, DOB)
+VALUES ("1234567" , "Timmy", "timmy@failure.org", "2005-10-28");
+`
+
+let select =`
+SELECT * FROM Users
+WHERE Username = "Bob";
+`
+
+let update =`
+UPDATE Users
+SET EMALI = "timmy@success.org"
+WHERE ID = "1234567"
+`
+let dele =`
+DELETE FROM Users
+WHERE ID = "1234567";
+`
+
+db.all(dele, CallbackFunc);
+
+
+// 
